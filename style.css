@@ -1,0 +1,642 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  background: #020106;
+  color: white;
+  font-family: Georgia, serif;
+}
+
+#app {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  height: 100dvh;
+  overflow: hidden;
+  background: radial-gradient(circle at center, #300b19 0%, #0b0308 40%, #020106 100%);
+}
+
+/* Twinkling stars */
+
+.stars {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.star {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: white;
+  border-radius: 50%;
+  animation: twinkle 2s infinite alternate;
+}
+
+@keyframes twinkle {
+  from { opacity: .1; }
+  to { opacity: 1; }
+}
+
+/* Scenes and transitions */
+
+.scene {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 0;
+  padding: 24px;
+  overflow: hidden;
+  text-align: center;
+}
+
+.scene.active {
+  display: flex;
+  animation: enter 1.2s ease both;
+}
+
+.scene.exit {
+  display: flex;
+  animation: exit 1.2s ease both;
+  pointer-events: none;
+}
+
+@keyframes enter {
+  from {
+    opacity: 0;
+    transform: scale(.97);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes exit {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(1.03);
+  }
+}
+
+/* Headings */
+
+.eyebrow {
+  margin-bottom: 16px;
+  font-size: 11px;
+  letter-spacing: 5px;
+  line-height: 1.6;
+  text-transform: uppercase;
+  opacity: .5;
+}
+
+.title {
+  font-size: clamp(28px, 5vw, 56px);
+  font-weight: normal;
+  letter-spacing: 2px;
+  line-height: 1.2;
+  text-shadow: 0 0 30px rgba(255, 80, 130, .4);
+}
+
+.subtitle {
+  margin-top: 14px;
+  font-size: 13px;
+  letter-spacing: 3px;
+  opacity: .55;
+}
+
+/* Flowers */
+
+.flowers {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: clamp(18px, 7vw, 70px);
+  width: 100%;
+  min-height: 250px;
+  margin-top: 45px;
+}
+
+.flower {
+  position: relative;
+  flex-shrink: 0;
+  width: 130px;
+  height: 205px;
+  cursor: pointer;
+  transition: transform .4s;
+}
+
+.flower:hover,
+.flower:focus-visible {
+  transform: translateY(-8px) scale(1.04);
+}
+
+.bloom {
+  position: absolute;
+  top: 0;
+  left: 18px;
+  width: 95px;
+  height: 95px;
+  transform: rotate(-45deg);
+}
+
+.petal {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  border-radius: 60% 40% 60% 40%;
+}
+
+.p1 {
+  top: 0;
+  left: 0;
+}
+
+.p2 {
+  top: 0;
+  right: 0;
+  transform: rotate(90deg);
+}
+
+.p3 {
+  bottom: 0;
+  left: 0;
+  transform: rotate(-90deg);
+}
+
+.p4 {
+  right: 0;
+  bottom: 0;
+  transform: rotate(180deg);
+}
+
+.center {
+  position: absolute;
+  top: 30px;
+  left: 30px;
+  z-index: 3;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+}
+
+.red .petal {
+  background: linear-gradient(145deg, #ff6d8f, #d00040 60%, #48000e);
+  box-shadow: inset -8px -8px 15px #350009;
+}
+
+.red .center {
+  background: radial-gradient(circle, #ffe2a8, #d65a27, #450007);
+  box-shadow: 0 0 20px #ff305f;
+}
+
+.black .petal {
+  background: linear-gradient(145deg, #555, #111 60%, #000);
+  box-shadow: inset -10px -10px 18px #000;
+}
+
+.black .center {
+  background: radial-gradient(circle, #777, #222, #000);
+}
+
+.stem {
+  position: absolute;
+  top: 73px;
+  left: 62px;
+  width: 7px;
+  height: 115px;
+  border-radius: 10px;
+  background: linear-gradient(to right, #0d2613, #3e7548, #0d2613);
+}
+
+.leaf {
+  position: absolute;
+  top: 130px;
+  left: 12px;
+  width: 53px;
+  height: 24px;
+  border-radius: 100% 0 100% 0;
+  background: #1b4d25;
+  transform: rotate(25deg);
+}
+
+.leaf2 {
+  position: absolute;
+  top: 108px;
+  right: 2px;
+  width: 48px;
+  height: 22px;
+  border-radius: 0 100% 0 100%;
+  background: #153b1d;
+  transform: rotate(-20deg);
+}
+
+.label {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  font-size: 12px;
+  letter-spacing: 4px;
+  opacity: .6;
+}
+
+/* Black flower warning */
+
+.warning {
+  position: absolute;
+  top: 18%;
+  left: 50%;
+  z-index: 20;
+  width: 90%;
+  font-size: 23px;
+  line-height: 1.7;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(-50%);
+  transition: opacity .5s;
+}
+
+.warning span {
+  font-size: 14px;
+  opacity: .65;
+}
+
+.fresh-warning {
+  position: fixed;
+  top: 18px;
+  left: 50%;
+  z-index: 50;
+  width: min(90%, 500px);
+  padding: 18px;
+  border: 1px solid rgba(255, 71, 126, .5);
+  border-radius: 18px;
+  background: rgba(25, 3, 15, .94);
+  box-shadow: 0 0 25px rgba(255, 30, 90, .25);
+  color: #ff91b2;
+  font-size: 20px;
+  line-height: 1.5;
+  text-align: center;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateX(-50%) scale(.9);
+  transition: opacity .25s, transform .25s, visibility .25s;
+  pointer-events: none;
+}
+
+.fresh-warning.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) scale(1);
+}
+
+.fresh-warning span {
+  display: inline-block;
+  margin-top: 10px;
+  color: #ffe0ea;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.flower.black {
+  position: relative;
+  z-index: 10;
+  flex-shrink: 0;
+  transition: left .25s ease, top .25s ease, transform .25s ease;
+}
+
+/* Moon and rose */
+
+.moon {
+  position: absolute;
+  top: 8%;
+  right: 10%;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #fff, #ffe5ed 45%, #ffb2c8);
+  box-shadow: 0 0 60px rgba(255, 180, 205, .3);
+}
+
+.moon::after {
+  position: absolute;
+  top: -8px;
+  left: 25px;
+  width: 112px;
+  height: 112px;
+  border-radius: 50%;
+  background: #180710;
+  content: "";
+}
+
+.rose {
+  margin-bottom: 24px;
+  font-size: 65px;
+  filter: drop-shadow(0 0 25px #ff315f);
+  animation: float 4s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+
+/* Romantic messages */
+
+.message {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 700px;
+}
+
+.message h2 {
+  margin-bottom: 18px;
+  color: #ff91b2;
+  font-size: clamp(26px, 4.5vw, 44px);
+  font-weight: normal;
+  line-height: 1.25;
+}
+
+.message p {
+  color: #f4dce4;
+  font-size: clamp(15px, 2.2vw, 20px);
+  line-height: 1.75;
+}
+
+/* Buttons */
+
+.btn {
+  position: relative;
+  z-index: 3;
+  margin-top: 26px;
+  padding: 13px 28px;
+  border: 1px solid rgba(255, 100, 150, .55);
+  border-radius: 40px;
+  background: rgba(255, 30, 90, .08);
+  color: #ffabc3;
+  font-family: Georgia, serif;
+  font-size: 13px;
+  letter-spacing: 1.5px;
+  cursor: pointer;
+  transition: .3s;
+}
+
+.btn:hover,
+.btn:focus-visible {
+  background: #e91e56;
+  color: white;
+  box-shadow: 0 0 25px rgba(255, 30, 90, .5);
+}
+
+/* Animated heart */
+
+.heart {
+  position: relative;
+  width: 100px;
+  height: 90px;
+  flex-shrink: 0;
+  margin-bottom: 30px;
+  transform: rotate(-45deg);
+  animation: beat 2s infinite;
+  filter: drop-shadow(0 0 30px #ff174f);
+}
+
+.heartBody {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  background: linear-gradient(145deg, #ff6d8f, #d00040 60%, #500014);
+}
+
+.heart::before,
+.heart::after {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  content: "";
+}
+
+.heart::before {
+  top: -50px;
+  background: #ff416d;
+}
+
+.heart::after {
+  left: 50px;
+  background: #d00040;
+}
+
+@keyframes beat {
+  0%, 100% { transform: rotate(-45deg) scale(1); }
+  15% { transform: rotate(-45deg) scale(1.08); }
+  30% { transform: rotate(-45deg) scale(1); }
+  45% { transform: rotate(-45deg) scale(1.05); }
+  60% { transform: rotate(-45deg) scale(1); }
+}
+
+/* Birthday finale */
+
+.final h1 {
+  max-width: 850px;
+  margin-bottom: 20px;
+  background: linear-gradient(90deg, #fff, #ff6395, #fff);
+  background-clip: text;
+  color: transparent;
+  font-size: clamp(30px, 5.5vw, 58px);
+  font-weight: normal;
+  line-height: 1.2;
+}
+
+.final p {
+  max-width: 700px;
+  color: #f6dce5;
+  font-size: clamp(15px, 2.3vw, 20px);
+  line-height: 1.75;
+}
+
+.ring {
+  margin-bottom: 18px;
+  font-size: 45px;
+  animation: ring 2s infinite alternate;
+}
+
+@keyframes ring {
+  from { transform: scale(.95); }
+  to { transform: scale(1.08); }
+}
+
+.signature {
+  margin-top: 24px;
+  color: #ff91b2;
+  font-size: 18px;
+  letter-spacing: 2px;
+}
+
+/* Floating decorations */
+
+.particle {
+  position: absolute;
+  bottom: -30px;
+  z-index: 3;
+  font-size: 18px;
+  pointer-events: none;
+  animation: rise linear forwards;
+}
+
+@keyframes rise {
+  to {
+    transform: translateY(-110vh) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+/* Responsive layout */
+
+@media (max-width: 600px) {
+  .scene {
+    padding: 18px;
+  }
+
+  .flowers {
+    gap: 12px;
+    margin-top: 35px;
+    transform: scale(.85);
+  }
+
+  .flower:hover,
+  .flower:focus-visible {
+    transform: scale(.88);
+  }
+
+  .moon {
+    top: 5%;
+    right: 5%;
+    width: 75px;
+    height: 75px;
+  }
+
+  .moon::after {
+    top: -5px;
+    left: 16px;
+    width: 70px;
+    height: 70px;
+  }
+
+  .rose {
+    margin-bottom: 20px;
+    font-size: 55px;
+  }
+
+  .message h2 {
+    margin-bottom: 14px;
+    font-size: clamp(24px, 6vw, 34px);
+  }
+
+  .message p,
+  .final p {
+    font-size: clamp(14px, 3.8vw, 17px);
+    line-height: 1.65;
+  }
+
+  .btn {
+    margin-top: 22px;
+    padding: 12px 22px;
+    font-size: 12px;
+  }
+
+  .final h1 {
+    margin-bottom: 16px;
+    font-size: clamp(28px, 8vw, 42px);
+  }
+
+  .ring {
+    margin-bottom: 14px;
+    font-size: 38px;
+  }
+
+  .signature {
+    margin-top: 18px;
+    font-size: 16px;
+  }
+
+  .fresh-warning {
+    top: 10px;
+    width: 92%;
+    padding: 12px;
+    font-size: 17px;
+  }
+}
+
+/* Short screens */
+
+@media (max-height: 650px) {
+  .scene {
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+
+  .eyebrow {
+    margin-bottom: 8px;
+  }
+
+  .flowers {
+    margin-top: 20px;
+  }
+
+  .rose {
+    margin-bottom: 12px;
+    font-size: 48px;
+  }
+
+  .message h2 {
+    margin-bottom: 10px;
+  }
+
+  .message p,
+  .final p {
+    line-height: 1.45;
+  }
+
+  .btn {
+    margin-top: 14px;
+    padding: 10px 20px;
+  }
+
+  .heart {
+    transform: rotate(-45deg) scale(.8);
+    margin-bottom: 12px;
+  }
+
+  .final h1 {
+    margin-bottom: 12px;
+  }
+
+  .ring {
+    margin-bottom: 10px;
+  }
+
+  .signature {
+    margin-top: 12px;
+  }
+}
