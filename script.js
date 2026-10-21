@@ -125,10 +125,36 @@ black.addEventListener("keydown", (event) => {
   }
 });
 
+const bgMusic = document.getElementById("bgMusic");
+const musicStart = document.getElementById("musicStart");
+
+if (bgMusic && musicStart) {
+  musicStart.addEventListener("click", async () => {
+    if (bgMusic.paused) {
+      try {
+        await bgMusic.play();
+        musicStart.textContent = "⏸ Stop Song 💔";
+      } catch (error) {
+        console.error("Music error:", error);
+        musicStart.textContent = "🎵 Tap to Play Song ❤️";
+      }
+    } else {
+      bgMusic.pause();
+      musicStart.textContent = "🎵 Play Song ❤️";
+    }
+  });
+
+  bgMusic.addEventListener("ended", () => {
+    musicStart.textContent = "🎵 Play Song ❤️";
+  });
+}
+
+
 // Red flower: continue to romantic message
 red.addEventListener("click", () => {
   changeScene(1);
 });
+
 
 // Red flower keyboard support
 red.addEventListener("keydown", (event) => {

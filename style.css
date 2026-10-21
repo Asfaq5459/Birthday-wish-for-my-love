@@ -640,3 +640,11 @@ body {
     margin-top: 12px;
   }
 }
+
+.music-btn {
+  position: fixed;
+  top: 15px;
+  right: 15px;
+  z-index: 100;
+  margin: 0;
+}
