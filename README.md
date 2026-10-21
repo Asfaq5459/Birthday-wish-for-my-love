@@ -14,13 +14,6 @@
 
 ---
 
-## 🌐 Live Demo
-
-💖 **The surprise is just one click away!**
-
-🔗 https://birthday-wish-for-my-lifeline.vercel.app/
-
-*Every click tells a story, every scene holds a feeling, and every moment is made with love.* ✨
 
 ## 💖 What's Inside?
 
@@ -82,7 +75,7 @@ Because love isn't just about saying the words. It's about making someone feel s
 
 <div align="center">
 
-### 💗 Crafted with Love by Asfaq 💗
+### 💗 Crafted with Love by Asfaq Ahmed💗
 
 *"Today. Tomorrow. And Every Lifetime."*
 
